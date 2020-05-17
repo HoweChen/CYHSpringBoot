@@ -1,0 +1,4 @@
+core:
+  redis:
+    hostName: 127.0.0.7
+    port: 6379

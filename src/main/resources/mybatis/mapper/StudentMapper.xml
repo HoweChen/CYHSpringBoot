@@ -8,11 +8,10 @@
     <result column="student_id" jdbcType="VARCHAR" property="studentId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="gender" jdbcType="VARCHAR" property="gender" />
-    <result column="grade" jdbcType="INTEGER" property="grade" />
   </resultMap>
   <sql id="Base_Column_List">
     <!--@mbg.generated generated on Sat May 30 13:39:00 CST 2020.-->
-    id, student_id, name, gender, grade
+    id, student_id, name, gender
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated generated on Sat May 30 13:39:00 CST 2020.-->
@@ -29,9 +28,9 @@
   <insert id="insert" parameterType="com.howechen.springboot.entity.StudentEntity" useGeneratedKeys="true" keyProperty="id">
     <!--@mbg.generated generated on Sat May 30 13:39:00 CST 2020.-->
     insert into student (id, student_id, name, 
-      gender, grade)
+      gender)
     values (#{id,jdbcType=INTEGER}, #{studentId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{gender,jdbcType=VARCHAR}, #{grade,jdbcType=INTEGER})
+      #{gender,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.howechen.springboot.entity.StudentEntity">
     <!--@mbg.generated generated on Sat May 30 13:39:00 CST 2020.-->
@@ -49,9 +48,6 @@
       <if test="gender != null">
         gender,
       </if>
-      <if test="grade != null">
-        grade,
-      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -65,9 +61,6 @@
       </if>
       <if test="gender != null">
         #{gender,jdbcType=VARCHAR},
-      </if>
-      <if test="grade != null">
-        #{grade,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -84,9 +77,6 @@
       <if test="gender != null">
         gender = #{gender,jdbcType=VARCHAR},
       </if>
-      <if test="grade != null">
-        grade = #{grade,jdbcType=INTEGER},
-      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -95,8 +85,7 @@
     update student
     set student_id = #{studentId,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
-      gender = #{gender,jdbcType=VARCHAR},
-      grade = #{grade,jdbcType=INTEGER}
+      gender = #{gender,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectAllByStudentId" resultMap="BaseResultMap">

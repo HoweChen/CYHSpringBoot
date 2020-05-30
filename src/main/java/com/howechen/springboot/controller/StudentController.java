@@ -24,10 +24,12 @@ public class StudentController {
   @PostMapping(path = "/create")
   @ResponseBody
   public DeferredResult<BaseResponseDto<?>> create(@RequestBody StudentDto studentDto) {
-    studentService.create(studentDto);
-    final DeferredResult<BaseResponseDto<?>> result = new DeferredResult<>();
-    result.setResult(BaseResponseDto.okay());
-    return result;
+    final StudentDto result = studentService.create(studentDto);
+    final DeferredResult<BaseResponseDto<?>> response = new DeferredResult<>();
+    final BaseResponseDto<StudentDto> responseDto = new BaseResponseDto<StudentDto>()
+        .okayWithResult(result);
+    response.setResult(responseDto);
+    return response;
   }
 
   @GetMapping(path = "/query")

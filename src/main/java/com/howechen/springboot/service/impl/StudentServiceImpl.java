@@ -12,6 +12,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author howechen
+ */
 @Service
 @Slf4j
 @AllArgsConstructor(onConstructor = @__({@Autowired}))
@@ -21,14 +24,17 @@ public class StudentServiceImpl implements StudentService {
   private final StudentDao studentDao;
 
   @Override
-  public void create(StudentDto studentDto) {
-    StudentEntity entity = StudentEntity.fromWeb(studentDto);
+  public StudentDto create(StudentDto studentDto) {
+
+    StudentEntity entity = new StudentEntity().toDao(studentDto);
     studentDao.insert(entity);
+    StudentDto result = new StudentDto();
+    return result.fromDao(entity);
   }
 
   @Override
   public StudentDto queryStudent(String studentId) {
     final StudentEntity foundStudent = studentDao.selectAllByStudentId(studentId);
-    return StudentDto.fromService(foundStudent);
+    return new StudentDto().fromDao(foundStudent);
   }
 }

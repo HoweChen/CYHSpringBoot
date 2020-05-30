@@ -1,8 +1,6 @@
 package com.howechen.springboot.dao.mybatis;
 
 import com.howechen.springboot.entity.StudentEntity;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.type.MappedJdbcTypes;
 import org.springframework.stereotype.Repository;
 
 /**

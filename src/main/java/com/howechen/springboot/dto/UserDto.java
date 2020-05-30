@@ -1,12 +1,10 @@
 package com.howechen.springboot.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
-import lombok.AllArgsConstructor;
+import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 /**
  * @author howechen
@@ -15,7 +13,9 @@ import lombok.RequiredArgsConstructor;
 @NoArgsConstructor
 public class UserDto {
 
+  @NotEmpty
   private String username;
+  @NotEmpty
   @JsonProperty(access = Access.WRITE_ONLY)
   private String password;
 

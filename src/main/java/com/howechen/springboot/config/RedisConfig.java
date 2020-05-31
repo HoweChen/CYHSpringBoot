@@ -23,11 +23,10 @@ public class RedisConfig {
         new RedisStandaloneConfiguration(redisProperties.getHost(), redisProperties.getPort()));
   }
 
-  @Bean
-  @Autowired
-  public RedisTemplate<String, Object> rTpl(
+  @Bean(value = "redisTemplate")
+  public RedisTemplate<Object, Object> rTpl(
       @Qualifier("redisConnection") LettuceConnectionFactory lettuceConnectionFactory) {
-    RedisTemplate<String, Object> template = new RedisTemplate<>();
+    RedisTemplate<Object, Object> template = new RedisTemplate<>();
     template.setConnectionFactory(lettuceConnectionFactory);
     return template;
   }

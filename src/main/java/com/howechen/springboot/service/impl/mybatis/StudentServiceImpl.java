@@ -1,4 +1,4 @@
-package com.howechen.springboot.service.impl;
+package com.howechen.springboot.service.impl.mybatis;
 
 import com.howechen.springboot.config.ServerException;
 import com.howechen.springboot.dao.StudentRepo;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 /**
  * @author howechen
  */
-@Service
+@Service(value = "service.mybatis.student")
 @Slf4j
 @AllArgsConstructor(onConstructor = @__({@Autowired}))
 public class StudentServiceImpl implements StudentService {

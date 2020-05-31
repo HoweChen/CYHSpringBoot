@@ -1,11 +1,11 @@
-package com.howechen.springboot.service.impl;
+package com.howechen.springboot.service.impl.mybatis;
 
 import com.howechen.springboot.entity.StudentExamEntity;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.howechen.springboot.dao.mybatis.StudentExamDao;
 import com.howechen.springboot.service.StudentExamService;
-@Service
+@Service(value = "service.mybatis.exam")
 public class StudentExamServiceImpl implements StudentExamService{
 
     @Resource

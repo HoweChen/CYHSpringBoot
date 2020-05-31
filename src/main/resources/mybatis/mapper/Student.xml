@@ -13,6 +13,7 @@
     <!--@mbg.generated generated on Sat May 30 13:39:00 CST 2020.-->
     id, student_id, name, gender
   </sql>
+  <cache type="com.howechen.springboot.support.RedisCache"/>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated generated on Sat May 30 13:39:00 CST 2020.-->
     select 
@@ -88,7 +89,7 @@
       gender = #{gender,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectAllByStudentId" resultMap="BaseResultMap">
+  <select id="selectAllByStudentId" resultMap="BaseResultMap" useCache="true">
     select
     <include refid="Base_Column_List" />
     from student

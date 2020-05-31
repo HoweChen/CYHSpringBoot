@@ -1,38 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.howechen.springboot.dao.mybatis.StudentExamDao">
   <resultMap id="BaseResultMap" type="com.howechen.springboot.entity.StudentExamEntity">
     <!--@mbg.generated-->
     <!--@Table student_exam-->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="exam_id" jdbcType="VARCHAR" property="examId" />
-    <result column="student_id" jdbcType="VARCHAR" property="studentId" />
-    <result column="grade" jdbcType="FLOAT" property="grade" />
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="exam_id" jdbcType="VARCHAR" property="examId"/>
+    <result column="student_id" jdbcType="VARCHAR" property="studentId"/>
+    <result column="grade" jdbcType="FLOAT" property="grade"/>
   </resultMap>
+  <cache type="com.howechen.springboot.support.RedisCache"/>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
     id, exam_id, student_id, grade
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
-    select 
-    <include refid="Base_Column_List" />
+    select
+    <include refid="Base_Column_List"/>
     from student_exam
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--@mbg.generated-->
-    delete from student_exam
+    delete
+    from student_exam
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.howechen.springboot.entity.StudentExamEntity" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id"
+    parameterType="com.howechen.springboot.entity.StudentExamEntity" useGeneratedKeys="true" >
     <!--@mbg.generated-->
-    insert into student_exam (exam_id, student_id, grade
-      )
-    values (#{examId,jdbcType=VARCHAR}, #{studentId,jdbcType=VARCHAR}, #{grade,jdbcType=FLOAT}
-      )
+    insert into student_exam (exam_id, student_id, grade)
+    values (#{examId,jdbcType=VARCHAR}, #{studentId,jdbcType=VARCHAR}, #{grade,jdbcType=FLOAT})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.howechen.springboot.entity.StudentExamEntity" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id"
+    parameterType="com.howechen.springboot.entity.StudentExamEntity" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into student_exam
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -58,7 +61,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.howechen.springboot.entity.StudentExamEntity">
+  <update id="updateByPrimaryKeySelective"
+    parameterType="com.howechen.springboot.entity.StudentExamEntity" >
     <!--@mbg.generated-->
     update student_exam
     <set>
@@ -74,12 +78,12 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.howechen.springboot.entity.StudentExamEntity">
+  <update id="updateByPrimaryKey" parameterType="com.howechen.springboot.entity.StudentExamEntity" >
     <!--@mbg.generated-->
     update student_exam
-    set exam_id = #{examId,jdbcType=VARCHAR},
-      student_id = #{studentId,jdbcType=VARCHAR},
-      grade = #{grade,jdbcType=FLOAT}
+    set exam_id    = #{examId,jdbcType=VARCHAR},
+        student_id = #{studentId,jdbcType=VARCHAR},
+        grade      = #{grade,jdbcType=FLOAT}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -1,5 +1,5 @@
 -- auto Generated on 2020-05-30
--- DROP TABLE IF EXISTS student_exam;
+DROP TABLE IF EXISTS student_exam;
 CREATE TABLE student_exam(
 	id INT (11) NOT NULL AUTO_INCREMENT COMMENT 'id',
 	exam_id VARCHAR (50) NOT NULL DEFAULT '' COMMENT 'examId',

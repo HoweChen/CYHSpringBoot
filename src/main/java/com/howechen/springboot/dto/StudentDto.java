@@ -22,12 +22,17 @@ public class StudentDto extends BaseRequestDto<StudentDto, StudentEntity> {
   private String studentId;
   private String name;
   private String gender;
+  private String registerDate;
 
   @Override
   public StudentDto fromDao(StudentEntity dao) {
     this.studentId = dao.getStudentId();
     this.name = dao.getName();
     this.gender = dao.getGender();
+
+    if (dao.getRegisterDate() != null) {
+      this.registerDate = dao.getRegisterDate().toString();
+    }
 
     return this;
   }

@@ -1,40 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.howechen.springboot.dao.mybatis.StudentDao">
   <resultMap id="BaseResultMap" type="com.howechen.springboot.entity.StudentEntity">
-    <!--@mbg.generated generated on Sat May 30 13:39:00 CST 2020.-->
     <!--@Table student-->
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="student_id" jdbcType="VARCHAR" property="studentId" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <id column="id" jdbcType="INTEGER" property="id"/>
+    <result column="student_id" jdbcType="VARCHAR" property="studentId"/>
+    <result column="name" jdbcType="VARCHAR" property="name"/>
+    <result column="gender" jdbcType="VARCHAR" property="gender"/>
+    <result column="register_date" jdbcType="DATE" property="registerDate"/>
+    <result column="op_time" jdbcType="TIMESTAMP" property="registerDate"/>
   </resultMap>
   <sql id="Base_Column_List">
-    <!--@mbg.generated generated on Sat May 30 13:39:00 CST 2020.-->
-    id, student_id, name, gender
+    id, student_id, name, gender, register_date, op_time
   </sql>
   <cache type="com.howechen.springboot.support.RedisCache"/>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    <!--@mbg.generated generated on Sat May 30 13:39:00 CST 2020.-->
-    select 
-    <include refid="Base_Column_List" />
+    select
+    <include refid="Base_Column_List"/>
     from student
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    <!--@mbg.generated generated on Sat May 30 13:39:00 CST 2020.-->
-    delete from student
+    delete
+    from student
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.howechen.springboot.entity.StudentEntity" useGeneratedKeys="true" keyProperty="id">
-    <!--@mbg.generated generated on Sat May 30 13:39:00 CST 2020.-->
-    insert into student (id, student_id, name, 
-      gender)
-    values (#{id,jdbcType=INTEGER}, #{studentId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{gender,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.howechen.springboot.entity.StudentEntity"
+    useGeneratedKeys="true" keyProperty="id">
+    insert into student (id, student_id, name,
+                         gender,register_date,op_time)
+    values (#{id,jdbcType=INTEGER}, #{studentId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+            #{gender,jdbcType=VARCHAR},#{registerDate,jdbcType=DATE},#{opTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.howechen.springboot.entity.StudentEntity">
-    <!--@mbg.generated generated on Sat May 30 13:39:00 CST 2020.-->
     insert into student
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -65,8 +64,8 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.howechen.springboot.entity.StudentEntity">
-    <!--@mbg.generated generated on Sat May 30 13:39:00 CST 2020.-->
+  <update id="updateByPrimaryKeySelective"
+    parameterType="com.howechen.springboot.entity.StudentEntity">
     update student
     <set>
       <if test="studentId != null">
@@ -82,16 +81,15 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.howechen.springboot.entity.StudentEntity">
-    <!--@mbg.generated generated on Sat May 30 13:39:00 CST 2020.-->
     update student
     set student_id = #{studentId,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      gender = #{gender,jdbcType=VARCHAR}
+        name       = #{name,jdbcType=VARCHAR},
+        gender     = #{gender,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectAllByStudentId" resultMap="BaseResultMap" useCache="true">
+  <select id="selectAllByStudentId" resultMap="BaseResultMap">
     select
-    <include refid="Base_Column_List" />
+    <include refid="Base_Column_List"/>
     from student
     where student_id = #{studentId,jdbcType=VARCHAR}
   </select>

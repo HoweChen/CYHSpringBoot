@@ -1,6 +1,9 @@
 package com.howechen.springboot.entity;
 
 import com.howechen.springboot.dto.StudentDto;
+import com.howechen.springboot.utils.DateTimeUtils;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.UUID;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -29,6 +32,8 @@ public class StudentEntity extends BaseEntity<StudentDto, StudentEntity> {
   private String studentId;
   private String name;
   private String gender;
+  private Date registerDate;
+  private Timestamp opTime;
 
   @Override
   public StudentEntity toDao(StudentDto dto) {
@@ -44,6 +49,8 @@ public class StudentEntity extends BaseEntity<StudentDto, StudentEntity> {
     this.name = dto.getName();
     this.studentId = ID_PREFIX.concat(UUID.randomUUID().toString());
     this.gender = genderString;
+    this.registerDate = DateTimeUtils.getCurrentDate();
+    this.opTime = DateTimeUtils.getCurrentTimestamp();
     return this;
   }
 }

@@ -1,12 +1,8 @@
 package com.howechen.springboot.entity;
 
-import com.howechen.springboot.dto.StudentDto;
-import com.howechen.springboot.dto.StudentExamDto;
-import io.netty.util.internal.StringUtil;
-import java.util.UUID;
+import com.howechen.springboot.dto.exam.StudentExamDto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.apache.commons.lang3.EnumUtils;
 import org.springframework.data.redis.core.RedisHash;
 
 

@@ -1,8 +1,10 @@
 package com.howechen.springboot.controller;
 
 import com.howechen.springboot.dto.BaseResponseDto;
-import com.howechen.springboot.dto.StudentDto;
+import com.howechen.springboot.dto.student.StudentDto;
+import com.howechen.springboot.dto.student.StudentQueryDto;
 import com.howechen.springboot.service.impl.mybatis.StudentServiceImpl;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -45,6 +47,17 @@ public class StudentController {
     final StudentDto serviceResult = mybatisStudentService.queryStudent(studentId);
     final BaseResponseDto<StudentDto> responseDto = new BaseResponseDto<StudentDto>()
         .okayWithResult(serviceResult);
+    result.setResult(responseDto);
+    return result;
+  }
+
+  @PostMapping(path = "/mybatis/query")
+  @ResponseBody
+  public DeferredResult<BaseResponseDto<List<StudentDto>>> mybatisQueryStudentByFields(
+      @RequestBody StudentQueryDto studentQueryDto) {
+    final DeferredResult<BaseResponseDto<List<StudentDto>>> result = new DeferredResult<>();
+    final List<StudentDto> serviceResult = mybatisStudentService.queryStudentByFields(studentQueryDto);
+    final BaseResponseDto<List<StudentDto>> responseDto = new BaseResponseDto<List<StudentDto>>().okayWithResult(serviceResult);
     result.setResult(responseDto);
     return result;
   }

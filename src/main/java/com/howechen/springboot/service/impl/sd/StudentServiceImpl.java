@@ -2,10 +2,11 @@ package com.howechen.springboot.service.impl.sd;
 
 import com.howechen.springboot.config.ServerException;
 import com.howechen.springboot.dao.StudentRepo;
-import com.howechen.springboot.dao.mybatis.StudentDao;
-import com.howechen.springboot.dto.StudentDto;
+import com.howechen.springboot.dto.student.StudentDto;
+import com.howechen.springboot.dto.student.StudentQueryDto;
 import com.howechen.springboot.entity.StudentEntity;
 import com.howechen.springboot.service.StudentService;
+import java.util.List;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -42,5 +43,10 @@ public class StudentServiceImpl implements StudentService {
       throw new ServerException("Cannot find student by given StudentId");
     });
     return result;
+  }
+
+  @Override
+  public List<StudentDto> queryStudentByFields(StudentQueryDto studentQueryDto) {
+    return null;
   }
 }

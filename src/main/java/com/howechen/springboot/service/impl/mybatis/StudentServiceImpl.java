@@ -1,12 +1,14 @@
 package com.howechen.springboot.service.impl.mybatis;
 
-import com.howechen.springboot.config.ServerException;
 import com.howechen.springboot.dao.StudentRepo;
 import com.howechen.springboot.dao.mybatis.StudentDao;
-import com.howechen.springboot.dto.StudentDto;
+import com.howechen.springboot.dto.student.StudentDto;
+import com.howechen.springboot.dto.student.StudentQueryDto;
 import com.howechen.springboot.entity.StudentEntity;
 import com.howechen.springboot.service.StudentService;
-import java.util.Optional;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,5 +38,19 @@ public class StudentServiceImpl implements StudentService {
   public StudentDto queryStudent(String studentId) {
     final StudentEntity foundStudent = studentDao.selectAllByStudentId(studentId);
     return new StudentDto().fromDao(foundStudent);
+  }
+
+  @Override
+  public List<StudentDto> queryStudentByFields(StudentQueryDto studentQueryDto) {
+    List<StudentDto> result = new ArrayList<>();
+    final List<StudentEntity> foundStudents = studentDao.selectByFields(studentQueryDto);
+    if (foundStudents != null && !foundStudents.isEmpty()) {
+      result = foundStudents.stream().map(studentEntity -> {
+        StudentDto dto = new StudentDto();
+        dto.fromDao(studentEntity);
+        return dto;
+      }).collect(Collectors.toList());
+    }
+    return result;
   }
 }

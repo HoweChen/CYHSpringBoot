@@ -1,6 +1,6 @@
 package com.howechen.springboot.entity;
 
-import com.howechen.springboot.dto.StudentDto;
+import com.howechen.springboot.dto.student.StudentDto;
 import com.howechen.springboot.utils.DateTimeUtils;
 import java.sql.Date;
 import java.sql.Timestamp;

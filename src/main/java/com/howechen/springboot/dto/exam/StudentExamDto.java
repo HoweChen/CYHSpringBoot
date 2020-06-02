@@ -1,7 +1,6 @@
-package com.howechen.springboot.dto;
+package com.howechen.springboot.dto.exam;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.howechen.springboot.dto.BaseRequestDto;
 import com.howechen.springboot.entity.StudentExamEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;

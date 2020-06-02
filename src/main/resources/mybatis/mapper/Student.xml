@@ -12,7 +12,12 @@
     <result column="op_time" jdbcType="TIMESTAMP" property="registerDate"/>
   </resultMap>
   <sql id="Base_Column_List">
-    id, student_id, name, gender, register_date, op_time
+    id,
+    student_id,
+    name,
+    gender,
+    register_date,
+    op_time
   </sql>
   <cache type="com.howechen.springboot.support.RedisCache"/>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -29,9 +34,9 @@
   <insert id="insert" parameterType="com.howechen.springboot.entity.StudentEntity"
     useGeneratedKeys="true" keyProperty="id">
     insert into student (id, student_id, name,
-                         gender,register_date,op_time)
+                         gender, register_date, op_time)
     values (#{id,jdbcType=INTEGER}, #{studentId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
-            #{gender,jdbcType=VARCHAR},#{registerDate,jdbcType=DATE},#{opTime,jdbcType=TIMESTAMP})
+            #{gender,jdbcType=VARCHAR}, #{registerDate,jdbcType=DATE}, #{opTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.howechen.springboot.entity.StudentEntity">
     insert into student
@@ -92,5 +97,38 @@
     <include refid="Base_Column_List"/>
     from student
     where student_id = #{studentId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByFields" parameterType="com.howechen.springboot.dto.student.StudentQueryDto"
+    resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from student
+    <trim prefix="WHERE" suffixOverrides="and">
+      <if test="studentId != null and studentId != ''">
+        student_id = #{studentId}
+          and
+      </if>
+      <if test="name != null and name != ''">
+        name = #{name}
+          and
+      </if>
+      <if test="gender != null and gender != ''">
+        gender = #{gender}
+          and
+      </if>
+      <if test="startDate != null and startDate != ''">
+        <![CDATA[
+        (DATE_FORMAT(student.register_date, '%Y-%m-%d')
+          >= DATE_FORMAT(#{startDate,jdbcType=DATE}, '%Y-%m-%d'))
+        ]]> and
+      </if>
+      <if test="endDate != null and endDate != ''">
+        <![CDATA[
+        (DATE_FORMAT(student.register_date, '%Y-%m-%d') <=
+         DATE_FORMAT(#{endDate,jdbcType=DATE}, '%Y-%m-%d'))
+        ]]>
+      </if>
+    </trim>
   </select>
 </mapper>

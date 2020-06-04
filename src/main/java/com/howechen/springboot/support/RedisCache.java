@@ -5,7 +5,6 @@ import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.cache.Cache;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -13,6 +12,7 @@ import org.springframework.data.redis.core.ValueOperations;
 /**
  * @author howechen
  */
+@SuppressWarnings({"unchecked", "rawtypes"})
 @Slf4j
 public class RedisCache implements Cache {
 
@@ -37,44 +37,42 @@ public class RedisCache implements Cache {
   /**
    * Put query result to redis
    *
-   * @param key
-   * @param value
+   * @param key key
+   * @param value value
    */
   @Override
-  @SuppressWarnings("unchecked")
   public void putObject(Object key, Object value) {
     RedisTemplate redisTemplate = getRedisTemplate();
     ValueOperations opsForValue = redisTemplate.opsForValue();
     opsForValue.set(key, value, EXPIRE_TIME_IN_MINUTES, TimeUnit.MINUTES);
-    log.debug("Put query result to redis");
+    log.info("Put query result to redis");
   }
 
   /**
    * Get cached query result from redis
    *
-   * @param key
-   * @return
+   * @param key key
+   * @return result
    */
   @Override
   public Object getObject(Object key) {
     RedisTemplate redisTemplate = getRedisTemplate();
     ValueOperations opsForValue = redisTemplate.opsForValue();
-    log.debug("Get cached query result from redis");
+    log.info("Get cached query result from redis");
     return opsForValue.get(key);
   }
 
   /**
    * Remove cached query result from redis
    *
-   * @param key
-   * @return
+   * @param key key
+   * @return result
    */
   @Override
-  @SuppressWarnings("unchecked")
   public Object removeObject(Object key) {
     RedisTemplate redisTemplate = getRedisTemplate();
     redisTemplate.delete(key);
-    log.debug("Remove cached query result from redis");
+    log.info("Remove cached query result from redis");
     return null;
   }
 
@@ -83,12 +81,12 @@ public class RedisCache implements Cache {
    */
   @Override
   public void clear() {
-    RedisTemplate redisTemplate = getRedisTemplate();
+    RedisTemplate<?,?> redisTemplate = getRedisTemplate();
     redisTemplate.execute((RedisCallback) connection -> {
       connection.flushDb();
       return null;
     });
-    log.debug("Clear all the cached query result from redis");
+    log.info("Clear all the cached query result from redis");
   }
 
   @Override

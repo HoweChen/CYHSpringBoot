@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.howechen.springboot.dao.mybatis.StudentExamDao">
+  <cache eviction="LRU" type="com.howechen.springboot.support.RedisCache"/>
   <resultMap id="BaseResultMap" type="com.howechen.springboot.entity.StudentExamEntity">
     <!--@mbg.generated-->
     <!--@Table student_exam-->
@@ -10,7 +11,6 @@
     <result column="student_id" jdbcType="VARCHAR" property="studentId"/>
     <result column="grade" jdbcType="FLOAT" property="grade"/>
   </resultMap>
-  <cache type="com.howechen.springboot.support.RedisCache"/>
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
     id, exam_id, student_id, grade
@@ -29,7 +29,7 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id"
-    parameterType="com.howechen.springboot.entity.StudentExamEntity" useGeneratedKeys="true" >
+    parameterType="com.howechen.springboot.entity.StudentExamEntity" useGeneratedKeys="true">
     <!--@mbg.generated-->
     insert into student_exam (exam_id, student_id, grade)
     values (#{examId,jdbcType=VARCHAR}, #{studentId,jdbcType=VARCHAR}, #{grade,jdbcType=FLOAT})
@@ -62,7 +62,7 @@
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective"
-    parameterType="com.howechen.springboot.entity.StudentExamEntity" >
+    parameterType="com.howechen.springboot.entity.StudentExamEntity">
     <!--@mbg.generated-->
     update student_exam
     <set>
@@ -78,7 +78,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.howechen.springboot.entity.StudentExamEntity" >
+  <update id="updateByPrimaryKey" parameterType="com.howechen.springboot.entity.StudentExamEntity">
     <!--@mbg.generated-->
     update student_exam
     set exam_id    = #{examId,jdbcType=VARCHAR},

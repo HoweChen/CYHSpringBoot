@@ -31,6 +31,7 @@ public class StudentServiceImpl implements StudentService {
     StudentEntity entity = new StudentEntity().toDao(studentDto);
     studentDao.insert(entity);
     StudentDto result = new StudentDto();
+    log.info(entity.getId().toString());
     return result.fromDao(entity);
   }
 

@@ -35,9 +35,9 @@
   <insert id="insert" parameterType="com.howechen.springboot.entity.StudentEntity"
     useGeneratedKeys="true" keyProperty="id">
     insert into student (id, student_id, name,
-    gender, register_date, op_time)
+                         gender, register_date, op_time)
     values (#{id,jdbcType=INTEGER}, #{studentId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
-    #{gender,jdbcType=VARCHAR}, #{registerDate,jdbcType=DATE}, #{opTime,jdbcType=TIMESTAMP})
+            #{gender,jdbcType=VARCHAR}, #{registerDate,jdbcType=DATE}, now())
   </insert>
   <insert id="insertSelective" parameterType="com.howechen.springboot.entity.StudentEntity">
     insert into student
@@ -89,8 +89,8 @@
   <update id="updateByPrimaryKey" parameterType="com.howechen.springboot.entity.StudentEntity">
     update student
     set student_id = #{studentId,jdbcType=VARCHAR},
-    name = #{name,jdbcType=VARCHAR},
-    gender = #{gender,jdbcType=VARCHAR}
+        name       = #{name,jdbcType=VARCHAR},
+        gender     = #{gender,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectAllByStudentId" resultMap="BaseResultMap">
@@ -108,15 +108,15 @@
     <trim prefix="WHERE" suffixOverrides="and">
       <if test="studentId != null and studentId != ''">
         student_id = #{studentId}
-        and
+          and
       </if>
       <if test="name != null and name != ''">
         name = #{name}
-        and
+          and
       </if>
       <if test="gender != null and gender != ''">
         gender = #{gender}
-        and
+          and
       </if>
       <if test="startDate != null and startDate != ''">
         <![CDATA[

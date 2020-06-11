@@ -50,7 +50,6 @@ public class StudentEntity extends BaseEntity<StudentDto, StudentEntity> {
     this.studentId = ID_PREFIX.concat(UUID.randomUUID().toString());
     this.gender = genderString;
     this.registerDate = DateTimeUtils.getCurrentDate();
-    this.opTime = DateTimeUtils.getCurrentTimestamp();
     return this;
   }
 }

@@ -9,9 +9,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
+@EnableTransactionManagement
 @RequiredArgsConstructor(onConstructor = @__({@Autowired}))
 public class RedisConfig {
 
@@ -23,13 +24,12 @@ public class RedisConfig {
         new RedisStandaloneConfiguration(redisProperties.getHost(), redisProperties.getPort()));
   }
 
-  @Bean(value = "redisTemplate")
+  @Bean(value = "com.howechen.springboot.redisTemplate")
   public RedisTemplate<Object, Object> rTpl(
       @Qualifier("redisConnection") LettuceConnectionFactory lettuceConnectionFactory) {
     RedisTemplate<Object, Object> template = new RedisTemplate<>();
     template.setConnectionFactory(lettuceConnectionFactory);
-    template.setKeySerializer(RedisSerializer.string());
-    template.setValueSerializer(RedisSerializer.json());
+    template.setEnableTransactionSupport(true);
 
     return template;
   }

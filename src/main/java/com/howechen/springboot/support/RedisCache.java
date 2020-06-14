@@ -37,7 +37,7 @@ public class RedisCache implements Cache {
   /**
    * Put query result to redis
    *
-   * @param key key
+   * @param key   key
    * @param value value
    */
   @Override
@@ -81,7 +81,7 @@ public class RedisCache implements Cache {
    */
   @Override
   public void clear() {
-    RedisTemplate<?,?> redisTemplate = getRedisTemplate();
+    RedisTemplate<?, ?> redisTemplate = getRedisTemplate();
     redisTemplate.execute((RedisCallback) connection -> {
       connection.flushDb();
       return null;
@@ -102,7 +102,7 @@ public class RedisCache implements Cache {
   private RedisTemplate<?, ?> getRedisTemplate() {
     if (redisTemplate == null) {
       redisTemplate = ApplicationContextProvider.getApplicationContext()
-          .getBean("redisTemplate", RedisTemplate.class);
+          .getBean("com.howechen.springboot.redisTemplate", RedisTemplate.class);
     }
     return redisTemplate;
   }

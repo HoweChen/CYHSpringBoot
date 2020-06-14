@@ -25,9 +25,9 @@ public class RedisConfig {
   }
 
   @Bean(value = "com.howechen.springboot.redisTemplate")
-  public RedisTemplate<Object, Object> rTpl(
+  public RedisTemplate<String, String> rTpl(
       @Qualifier("redisConnection") LettuceConnectionFactory lettuceConnectionFactory) {
-    RedisTemplate<Object, Object> template = new RedisTemplate<>();
+    RedisTemplate<String, String> template = new RedisTemplate<>();
     template.setConnectionFactory(lettuceConnectionFactory);
     template.setEnableTransactionSupport(true);
 

@@ -1,5 +1,6 @@
 package com.howechen.springboot.dto.student;
 
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,6 @@ public class StudentQueryDto {
   private String studentId;
   private String name;
   private String gender;
-  private String startDate;
-  private String endDate;
-
+  private Date startDate;
+  private Date endDate;
 }
